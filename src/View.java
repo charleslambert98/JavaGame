@@ -1,3 +1,5 @@
+import org.w3c.dom.css.Rect;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,13 +7,14 @@ import java.awt.*;
 public class View extends JPanel {
     private final int viewWidth = 500;
     private final int viewHeight = 300;
+    int xLoc;
+    int yLoc;
     JFrame frame;
 
     public View() {
 
 
         // Set up the JFrame
-
         frame = new JFrame();
         frame.setBackground(Color.gray);
         frame.getContentPane().add(this, BorderLayout.CENTER);
@@ -31,5 +34,10 @@ public class View extends JPanel {
     }
 
     public void update(int x, int y) {
+    }
+
+    protected void paintComponent(Graphics g) {
+        // Draw the image on the frame
+        g.drawImage(<image>, xLoc, yLoc, Color.gray, this);
     }
 }

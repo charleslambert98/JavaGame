@@ -8,6 +8,7 @@ public class Model {
 
 
     public void updateLocationAndDirection() {
+
     }
 
     public int getX() {
