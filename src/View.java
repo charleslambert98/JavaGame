@@ -1,7 +1,12 @@
 import org.w3c.dom.css.Rect;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class View extends JPanel {
@@ -10,10 +15,12 @@ public class View extends JPanel {
     int xLoc;
     int yLoc;
     JFrame frame;
+    BufferedImage image;
 
     public View() {
 
 
+        importImage();
         // Set up the JFrame
         frame = new JFrame();
         frame.setBackground(Color.gray);
@@ -34,10 +41,35 @@ public class View extends JPanel {
     }
 
     public void update(int x, int y) {
+        xLoc = x;
+        yLoc = y;
+        frame.repaint();
+
     }
 
     protected void paintComponent(Graphics g) {
         // Draw the image on the frame
-        g.drawImage(<image>, xLoc, yLoc, Color.gray, this);
+        g.drawImage(image, xLoc, yLoc, Color.gray, this);
     }
+     void importImage(){
+         String imgLoc = "images/clock.png";
+         image  = createImage(imgLoc);
+
+     }
+    private BufferedImage createImage(String loc) {
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(new File(loc));
+            return bufferedImage;
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void addKeyInput(KeyListener kL){
+        frame.addKeyListener(kL);
+        System.out.println("Key Listener added");
+    }
+
 }
+
